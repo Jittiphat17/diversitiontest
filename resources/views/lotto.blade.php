@@ -19,33 +19,34 @@
     <div class="container d-flex flex-column align-items-center p-4">
 
         <div class="card p-4 w-100 mb-4" style="max-width: 1000px;">
-            <form method="POST" action="{{ route('lotto.draw') }}" class="mb-4 text-center">
-                @csrf
-                <button class="btn btn-warning">ดำเนินการสุ่มรางวัล</button>
-            </form>
+
             <table class="table table-bordered text-center table-hover">
+                <h3 class="text-center text-bg-warning">ผลการออกรางวัล</h3>
                 <tr>
-                    <th class="table-primary">รางวัลที่ 1 (1 รางวัล)</th>
+                    <th class="table-warning">รางวัลที่ 1 (1 รางวัล)</th>
                     <td>{{ $reward['r1'] ?? '-' }}</td>
                 </tr>
                 <tr>
-                    <th class="table-primary">รางวัลที่ 2 (3 รางวัล)</th>
+                    <th class="table-warning">รางวัลที่ 2 (3 รางวัล)</th>
                     <td>
                         {{ isset($reward['r2']) ? implode(', ', array_map(fn($n) => str_pad($n, 3, '0', STR_PAD_LEFT), $reward['r2'])) : '-' }}
                     </td>
                 </tr>
                 <tr>
-                    <th class="table-primary">เลขข้างเคียง (2 รางวัล)</th>
+                    <th class="table-warning">เลขข้างเคียง (2 รางวัล)</th>
                     <td>
                         {{ isset($reward['near']) ? implode(', ', array_map(fn($n) => str_pad($n, 3, '0', STR_PAD_LEFT), $reward['near'])) : '-' }}
                     </td>
                 </tr>
                 <tr>
-                    <th class="table-primary">เลขท้าย 2 ตัว (10 รางวัล)</th>
+                    <th class="table-warning">เลขท้าย 2 ตัว (10 รางวัล)</th>
                     <td>{{ isset($reward['last2']) ? str_pad($reward['last2'], 2, '0', STR_PAD_LEFT) : '-' }}</td>
                 </tr>
             </table>
-
+            <form method="POST" action="{{ route('lotto.draw') }}" class="mb-40 text-center">
+                @csrf
+                <button class="btn btn-warning pt-10">ดำเนินการสุ่มรางวัล</button>
+            </form>
 
         </div>
 
