@@ -49,14 +49,14 @@ class LottoController extends Controller
         $last2 = substr($input, 1); 
 
         $reward = session('reward');
-        $hits = [];
+        $adds = [];
 
-        if ($num === $reward['r1']) $hits[] = "เลข {$input} ถูกรางวัลที่ 1";
-        if (in_array($num, $reward['r2'])) $hits[] = "เลข {$input} ถูกรางวัลที่ 2";
-        if (in_array($num, $reward['near'])) $hits[] = "เลข {$input} ถูกรางวัลเลขข้างเคียง";
-        if ($last2 === str_pad($reward['last2'], 2, '0', STR_PAD_LEFT)) $hits[] = "เลข {$input} ถูกรางวัลเลขท้าย 2 ตัว";
+        if ($num === $reward['r1']) $adds[] = "เลข {$input} ถูกรางวัลที่ 1";
+        if (in_array($num, $reward['r2'])) $adds[] = "เลข {$input} ถูกรางวัลที่ 2";
+        if (in_array($num, $reward['near'])) $adds[] = "เลข {$input} ถูกรางวัลเลขข้างเคียง";
+        if ($last2 === str_pad($reward['last2'], 2, '0', STR_PAD_LEFT)) $adds[] = "เลข {$input} ถูกรางวัลเลขท้าย 2 ตัว";
 
-        session(['check_result' => $hits ?: ["เลข {$input} ไม่ถูกรางวัลใด ๆ"]]);
+        session(['check_result' => $adds ?: ["เลข {$input} ไม่ถูกรางวัลใด ๆ"]]);
 
         return redirect()->route('lotto.index');
     }
